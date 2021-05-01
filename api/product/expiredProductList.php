@@ -22,6 +22,8 @@
         'productId' => $ProductId,
         'productName' => $ProductName,
         'expiryDate' => $ExpiryDate,
+        'rackNumber' => $RackNumber,
+        'quantity' => $Quantity
       );
       array_push($expiredList, $expiredItem);
     }
