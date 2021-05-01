@@ -1,5 +1,5 @@
 <?php 
-  class ProductData {
+  class OrderData {
 
     private $conn;
     private $tableName;
@@ -8,8 +8,24 @@
       $this->conn = $db;
     }
 
-    public function fetchOrderDataByBatch($offset, $limit) {
-      $query = 'SELECT * FROM ( SELECT * , ROW_NUMBER() OVER (ORDER BY InvoiceNumber, ProductId) AS RowNum FROM `orderdatatable` ) orderData WHERE orderdata.RowNum BETWEEN ' . $offset .'AND '. ($offset + $limit);
+    public function getOrderData($invoiceNumber, $productId, $productName, $customerId, $limit, $offset) {
+      if ($invoiceNumber) {
+        $sql[] = " InvoiceNumber = '$invoiceNumber' ";
+      }
+      if ($productId) {
+        $sql[] = " ProductId = '$productId' ";
+      }
+      if ($productName) {
+        $sql[] = " ProductName LIKE '%$productName%' ";
+      }
+      if ($customerId) {
+        $sql[] = " CustomerId = '$customerId' ";
+      }
+      $query = "SELECT * FROM `orderdatatable`";
+      if (!empty($sql)) {
+          $query .= ' WHERE ' . implode(' AND ', $sql);
+      }
+      $query .= ' LIMIT ' . $limit . ' OFFSET ' . $offset;
       $stmt = $this->conn->prepare($query);
       $stmt->execute();
       return $stmt;
