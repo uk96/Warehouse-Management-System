@@ -26,6 +26,8 @@
   $database = new Database();
   $db = $database->connect();
   $product = new ProductData($db);
+  $totalResult = $product->getCount($productId, $productName, $rackNumber);
+  $total = (int)$totalResult->fetch(PDO::FETCH_ASSOC)['COUNT(*)'];
   $result = $product->getProductList($productId, $productName, $rackNumber, $limit, $offset);
   $num = $result->rowCount();
 
@@ -46,7 +48,8 @@
     }
 
     $response = array(
-        'total' => $num,
+        'total' => $total,
+        'count' => $num,
         'data' => $productList
     );
     echo json_encode($response);

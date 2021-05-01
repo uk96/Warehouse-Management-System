@@ -15,6 +15,25 @@
       return $stmt;
     }
 
+    public function getCount($productId, $productName, $rackNumber) {
+      if ($productId) {
+        $sql[] = " ProductId = '$productId' ";
+      }
+      if ($productName) {
+        $sql[] = " ProductName LIKE '%$productName%' ";
+      }
+      if ($rackNumber) {
+        $sql[] = " RackNumber = '$rackNumber' ";
+      }
+      $query = "SELECT COUNT(*) FROM `productdata`";
+      if (!empty($sql)) {
+        $query .= ' WHERE ' . implode(' AND ', $sql);
+      }
+      $stmt = $this->conn->prepare($query);
+      $stmt->execute();
+      return $stmt;
+    }
+
     public function getProductList($productId, $productName, $rackNumber, $limit, $offset) {
       if ($productId) {
         $sql[] = " ProductId = '$productId' ";

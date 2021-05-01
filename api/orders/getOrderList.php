@@ -31,6 +31,8 @@
   $database = new Database();
   $db = $database->connect();
   $orderData = new OrderData($db);
+  $totalResult = $orderData->getCount($invoiceNumber, $productId, $productName, $customerId);
+  $total = (int)$totalResult->fetch(PDO::FETCH_ASSOC)['COUNT(*)'];
   $result = $orderData->getOrderData($invoiceNumber, $productId, $productName, $customerId, $limit, $offset);
   $num = $result->rowCount();
 
@@ -54,7 +56,8 @@
     }
 
     $response = array(
-        'total' => $num,
+        'total' => $total,
+        'count' => $num,
         'data' => $orderList
     );
     echo json_encode($response);
