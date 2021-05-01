@@ -5,16 +5,28 @@
   include_once '../../config/database.php';
   include_once '../../models/ProductData.php';
 
-  $productId = $_GET['productId'];
-  $productName = $_GET['productName'];
-  $rakeNumber = $_GET['rakeNumber'];
+  $productId = NULL;
+  $productName = NULL;
+  $rackNumber = NULL;
+  if (isset($_GET['productId']))
+  {
+    $productId = $_GET['productId'];
+  }
+  if (isset($_GET['productName']))
+  {
+    $productName = $_GET['productName'];
+  }
+  if (isset($_GET['rackNumber']))
+  {
+    $rackNumber = $_GET['rackNumber'];
+  }
   $limit = $_GET['limit'];
   $offset = $_GET['offset'];
 
   $database = new Database();
   $db = $database->connect();
   $product = new ProductData($db);
-  $result = $product->getProductList($productId, $productName, $rakeNumber, $limit, $offset);
+  $result = $product->getProductList($productId, $productName, $rackNumber, $limit, $offset);
   $num = $result->rowCount();
 
   if($num > 0) {

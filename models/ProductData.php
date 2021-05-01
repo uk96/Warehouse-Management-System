@@ -15,15 +15,15 @@
       return $stmt;
     }
 
-    public function getProductList($productId, $productName, $rakeNumber, $limit, $offset) {
+    public function getProductList($productId, $productName, $rackNumber, $limit, $offset) {
       if ($productId) {
         $sql[] = " ProductId = '$productId' ";
       }
       if ($productName) {
         $sql[] = " ProductName LIKE '%$productName%' ";
       }
-      if ($rakeNumber) {
-        $sql[] = " RakeNumber = '$rakeNumber' ";
+      if ($rackNumber) {
+        $sql[] = " RackNumber = '$rackNumber' ";
       }
       $query = "SELECT * FROM `productdata`";
       if (!empty($sql)) {
