@@ -7,9 +7,9 @@ header('Content-Type: application/json');
 use PHPMailer\PHPMailer\PHPMailer; 
 use PHPMailer\PHPMailer\Exception; 
  
-require 'C:/xampp/htdocs/PHPMailer-master/src/Exception.php'; 
-require 'C:/xampp/htdocs/PHPMailer-master/src/PHPMailer.php'; 
-require 'C:/xampp/htdocs/PHPMailer-master/src/SMTP.php'; 
+require '../../PHPMailer/src/Exception.php'; 
+require '../../PHPMailer/src/PHPMailer.php'; 
+require '../../PHPMailer/src/SMTP.php'; 
 
 $data = json_decode(file_get_contents('php://input'), true);
 $tableData = $data['data'];
