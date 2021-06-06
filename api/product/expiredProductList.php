@@ -4,12 +4,21 @@
 
   include_once '../../config/database.php';
   include_once '../../models/ProductData.php';
-//include_once '../../helper/Mail.php';
 
   $database = new Database();
   $db = $database->connect();
   $product = new ProductData($db);
-  $result = $product->readExpiredProducts();
+  $startDate = NULL;
+  $endDate = NULL;
+  if (isset($_GET['startDate']))
+  {
+    $startDate = $_GET['startDate'];
+  }
+  if (isset($_GET['endDate']))
+  {
+    $endDate = $_GET['endDate'];
+  }
+  $result = $product->readExpiredProducts($startDate,$endDate);
   $num = $result->rowCount();
 
   if($num > 0) {

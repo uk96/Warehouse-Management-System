@@ -40,6 +40,28 @@
         $stmt->execute();
         return $stmt;
     }
+
+    public function insertDailySalesData($dailyData){
+        try{
+            $query = 'INSERT INTO dailysalesdata (ProductId, SalesDate, Sales, Quantity) VALUES ("'.$dailyData["productId"].'", "'.$dailyData["salesDate"].'", "'.$dailyData["sales"].'", "'.$dailyData["quantity"].'")';
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            return 1;
+        } catch(PDOException $e) {
+            return 0;
+        } 
+    }
+
+    public function updateQuantityDailySales($dailySalesData){
+        try{
+            $query = 'UPDATE dailysalesdata SET Quantity="'.$dailySalesData['Quantity'].'" , Sales="'.$dailySalesData['Sales'].'" WHERE SalesDate = "'.$dailySalesData['SalesDate'].'" AND ProductId = "'.$dailySalesData['ProductId'].'"';
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            return 1;
+        } catch(PDOException $e) {
+            return 0;
+        }
+    }
   }
 
 ?>

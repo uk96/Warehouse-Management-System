@@ -52,5 +52,16 @@
       $stmt->execute();
       return $stmt;
     }
+
+    public function insertOrder($orderData){
+      try{
+        $query = 'INSERT INTO orderdatatable (InvoiceNumber, ProductId, ProductName, Quantity, InvoiceDate, UnitPrice, CustomerId, Country) VALUES ("'.$orderData["invoiceNumber"].'", "'.$orderData["productId"].'", "'.$orderData["productName"].'", "'.$orderData["quantity"].'", "'.$orderData["invoiceDate"].'", "'.$orderData["unitPrice"].'", "'.$orderData["customerId"].'", "'.$orderData["country"].'")';
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return 1;
+      } catch(PDOException $e) {
+        return 0;
+      } 
+    }
   }
 ?>

@@ -42,7 +42,8 @@
         'productName' => $ProductName,
         'expiryDate' => $ExpiryDate,
         'rackNumber' => $RackNumber,
-        'quantity' => $Quantity
+        'quantity' => $Quantity,
+        'leadTime' => $LeadTime
       );
       array_push($productList, $product);
     }
