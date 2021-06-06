@@ -2,9 +2,6 @@
   class Database {
     // DB Params
     private $host = 'localhost';
-    // private $db_name = 'id16919222_wms_system';
-    // private $username = 'id16919222_root';
-    // private $password = 'Tejal99@12345678';
     private $db_name = 'wms_system';
     private $username = 'root';
     private $password = '';
